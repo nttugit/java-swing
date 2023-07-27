@@ -2,6 +2,7 @@ package lesson_95_radio_and_checkbox;
 
 import java.awt.BorderLayout;
 import java.awt.CheckboxGroup;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -12,8 +13,10 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -21,18 +24,10 @@ import lesson_94_icon_image.MainView;
 
 public class MenuView extends JFrame {
 	public MenuModel menuModel;
-	public JCheckBox checkbox_tomato;
-	public JCheckBox checkbox_bellpepper;
-	public JCheckBox checkbox_popcorn;
-	public JCheckBox checkbox_pineapple;
-	public JCheckBox checkbox_lettuce;
-	public JCheckBox checkbox_guacamole;
-	public JRadioButton radioButton_beef;
-	public JRadioButton radioButton_chicken;
-	public JRadioButton radioButton_pork;
-	public ButtonGroup mainDishButtonGroup;
 	public ArrayList<JCheckBox> subDishButtonGroup;
 	public JLabel userChoiceLabel;
+	public JComboBox jComboBox_mainToppings;
+	public JList jList_subToppings;
 
 	public MenuView() {
 		this.menuModel = new MenuModel();
@@ -60,113 +55,25 @@ public class MenuView extends JFrame {
 
 		// Main dishes
 		JPanel mainDishPanel = new JPanel();
-		mainDishPanel.setLayout(new GridLayout(2, 3));
-
-		mainDishButtonGroup = new ButtonGroup();
-		radioButton_beef = new JRadioButton("Thịt bò");
-		radioButton_beef.setFont(dishFont);
-		radioButton_chicken = new JRadioButton("Thịt gà");
-		radioButton_chicken.setFont(dishFont);
-		radioButton_pork = new JRadioButton("Thịt heo");
-		radioButton_pork.setFont(dishFont);
-
-		ImageIcon imageicon_beef = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/beef.jpeg")));
-		ImageIcon imageicon_chicken = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/chicken.jpg")));
-		ImageIcon imageicon_pork = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/pork.jpg")));
-
-		ImageIcon imageicon_tomato = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/tomato.jpg")));
-		ImageIcon imageicon_bellpepper = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/bellpepper.jpg")));
-		ImageIcon imageicon_corn = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/corn.jpg")));
-		ImageIcon imageicon_pineapple = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/pineapple.jpg")));
-		ImageIcon imageicon_lettuce = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/lettuce.jpg")));
-		ImageIcon imageicon_guacamole = new ImageIcon(
-				Toolkit.getDefaultToolkit().createImage(MenuView.class.getResource("./img/guacamole.jpg")));
-
-		// Main dish images
-		JLabel beefLabel = new JLabel();
-		beefLabel.setIcon(imageicon_beef);
-		JLabel chickenLabel = new JLabel();
-		chickenLabel.setIcon(imageicon_chicken);
-		JLabel porkLabel = new JLabel();
-		porkLabel.setIcon(imageicon_pork);
-
-		// Sub food images
-		JLabel tomatoLabel = new JLabel();
-		tomatoLabel.setIcon(imageicon_tomato);
-		JLabel bellPepperLabel = new JLabel();
-		bellPepperLabel.setIcon(imageicon_bellpepper);
-		JLabel cornLabel = new JLabel();
-		cornLabel.setIcon(imageicon_corn);
-		JLabel pineappleLabel = new JLabel();
-		pineappleLabel.setIcon(imageicon_pineapple);
-		JLabel lettuceLabel = new JLabel();
-		lettuceLabel.setIcon(imageicon_lettuce);
-		JLabel gaucamoleLabel = new JLabel();
-		gaucamoleLabel.setIcon(imageicon_guacamole);
-
-		mainDishButtonGroup.add(radioButton_beef);
-		mainDishButtonGroup.add(radioButton_chicken);
-		mainDishButtonGroup.add(radioButton_pork);
-
-		mainDishPanel.add(beefLabel);
-		mainDishPanel.add(chickenLabel);
-		mainDishPanel.add(porkLabel);
-		mainDishPanel.add(radioButton_beef);
-		mainDishPanel.add(radioButton_chicken);
-		mainDishPanel.add(radioButton_pork);
-
+		String mainToppings[] = new String[] {"Thịt bò", "Thịt heo", "Thị gà"}; 
+		 jComboBox_mainToppings = new JComboBox<>(mainToppings);
+		jComboBox_mainToppings.setFont(dishFont);
+		mainDishPanel.add(jComboBox_mainToppings);
+		
+		
 		// Sub dishes
 		JPanel subDishPanel = new JPanel();
-		subDishPanel.setLayout(new GridLayout(4, 3));
-		subDishButtonGroup = new ArrayList<JCheckBox>();
+		String subToppings[] = new String[] {"Tomato", "Bell Pepper", "Popcorn","Pineapple","Guacamole","Lettuce"}; 
+		jList_subToppings = new JList<>(subToppings);
+		jList_subToppings.setFont(dishFont);
+		subDishPanel.add(jList_subToppings);
 		
-		checkbox_tomato = new JCheckBox("Tomato");
-		checkbox_tomato.setFont(dishFont);
-		checkbox_bellpepper = new JCheckBox("Bell Pepper");
-		checkbox_bellpepper.setFont(dishFont);
-		checkbox_popcorn = new JCheckBox("Popcorn");
-		checkbox_popcorn.setFont(dishFont);
-		checkbox_pineapple = new JCheckBox("Pineapple");
-		checkbox_pineapple.setFont(dishFont);
-		checkbox_lettuce = new JCheckBox("Lettuce");
-		checkbox_lettuce.setFont(dishFont);
-		checkbox_guacamole = new JCheckBox("Guacamole");
-		checkbox_guacamole.setFont(dishFont);
-
-		subDishPanel.add(tomatoLabel);
-		subDishPanel.add(bellPepperLabel);
-		subDishPanel.add(cornLabel);
-		subDishPanel.add(checkbox_tomato);
-		subDishPanel.add(checkbox_bellpepper);
-		subDishPanel.add(checkbox_popcorn);
-
-		subDishPanel.add(pineappleLabel);
-		subDishPanel.add(lettuceLabel);
-		subDishPanel.add(gaucamoleLabel);
-		subDishPanel.add(checkbox_pineapple);
-		subDishPanel.add(checkbox_lettuce);
-		subDishPanel.add(checkbox_guacamole);
-
-		subDishButtonGroup.add(checkbox_tomato);
-		subDishButtonGroup.add(checkbox_bellpepper);
-		subDishButtonGroup.add(checkbox_popcorn);
-		subDishButtonGroup.add(checkbox_pineapple);
-		subDishButtonGroup.add(checkbox_lettuce);
-		subDishButtonGroup.add(checkbox_guacamole);
-
 		// Option panel (include sub & main dishes)
 		JPanel optionPanel = new JPanel();
-		optionPanel.setLayout(new GridLayout(2, 1));
-		optionPanel.add(mainDishPanel);
-		optionPanel.add(subDishPanel);
+		optionPanel.setLayout(new BorderLayout());	
+
+		optionPanel.add(mainDishPanel, BorderLayout.NORTH);
+		optionPanel.add(subDishPanel, BorderLayout.CENTER);
 
 		// Payment panel
 		JPanel paymentPanel = new JPanel();

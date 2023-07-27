@@ -17,30 +17,18 @@ public class MenuController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		String mainToppings = "";
+		String mainToppings = (String) this.menuView.jComboBox_mainToppings.getSelectedItem();
 		String subToppings = "";
+		Object subToppingsObj[] = this.menuView.jList_subToppings.getSelectedValues();
+		if (mainToppings == null || subToppingsObj.length == 0)
+			return;
 
-		Enumeration<AbstractButton> mainToppingButtons = menuView.mainDishButtonGroup.getElements();
-		while (mainToppingButtons.hasMoreElements()) {
-			AbstractButton button = mainToppingButtons.nextElement();
-			if (button.isSelected()) {
-				mainToppings = button.getText();
-			}
+		for (Object o : subToppingsObj) {
+			subToppings += (String) o + ", ";
 		}
-		System.out.println(mainToppings);
-
-		for (JCheckBox button : this.menuView.subDishButtonGroup) {
-			if (button.isSelected()) {
-				subToppings += button.getText() + ", ";
-			}
-		}
-
-		subToppings = subToppings.substring(0, subToppings.length() - 2);
-		System.out.println(subToppings);
-
-		this.menuView.menuModel.setOption(mainToppings + ", " + subToppings);
+		subToppings = subToppings.substring(0 , subToppings.length() - 2);
+		this.menuView.menuModel.setOption(mainToppings +", " + subToppings);
 		this.menuView.menuModel.calculateTotalPrice();
 		this.menuView.showTotalPrice();
 	}
-
 }
